@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mysql = require('mysql');
+const bodyParser = require('body-parser');
 const myConnection = require('express-myconnection');
 const port = 3000;
 const optionBDD = {
@@ -15,6 +16,8 @@ app.use(myConnection(mysql, optionBDD, 'pool'));
 app.use(express.static('public')); //definition des resources static
 app.set('views', './IHM'); //definition du chemin de mes views
 app.set('view engine', 'ejs'); // definition du moteur de views
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.get('/', (req, res)=>{
   req.getConnection((error, connection)=>{
