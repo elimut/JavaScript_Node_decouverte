@@ -14,7 +14,8 @@
     "express": "^4.18.2",
     "express-myconnection": "^1.0.4",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "npm-connection": "^1.0.0"
   },
-  "description": ""
+  "description": "https://github.com/Kazetus/vs-code/tree/main/nodeBack\r GitHub\r voir ressources statiques"
 }

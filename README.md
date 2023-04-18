@@ -74,3 +74,51 @@ templates engines ou moteur de rendu, il en existe plusieurs
 ex:ejs ->
 balises avec % faire du js dans html
 
+
+PS C:\Users\utilisateur\Desktop\nodeBack> mysql -u root -p;
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 29
+Server version: 8.0.32 MySQL Community Server - GPL
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+Type 'help;' or '\h' for help. Type '\c' to clear the current input
+mysql> CREATE DATABASE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the x to use near '' at line 1
+mysql> create database todolist;
+Query OK, 1 row affected (0.03 sec)
+mysql> use todolist
+Database changed
+mysql> create table liste (
+    -> id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> title VARCHAR(40);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the x to use near '' at line 3
+mysql> create table liste(
+    -> id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> title VARCHAR(40),
+    -> description VARCHAR(255)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+mysql> show tables;
++--------------------+
+| Tables_in_todolist |
++--------------------+
+| liste              |
++--------------------+
+1 row in set (0.01 sec)
+mysql> show columns from liste;
++-------------+--------------+------+-----+---------+---------------
+| Field       | Type         | Null | Key | Default | Extra
++-------------+--------------+------+-----+---------+---------------
+| id          | int          | NO   | PRI | NULL    | auto_increment
+| title       | varchar(40)  | YES  |     | NULL    |
+| description | varchar(255) | YES  |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+mysql> insert into liste (title, description) values ('titre1','description1);
+    '> mysql
+    '> insert into liste (title, description)values ('titre2','description2');iption2');
+    '> ^C
+mysql>
