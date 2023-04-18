@@ -1,31 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-  <%- include('./component/header') %>
-  <section>
-    <form action="">
-      <label for="Title">Titre</label>
-      <input type="text" id="Title" name="Title"><br>
-      <label for="description">Description de la tâche</label><br>
-      <textarea name="description" id="description" cols="30" rows="10"></textarea><br>
-      <input type="submit" value="Enregistrer">
-    </form>
-    <p>------------------------------------------------------------------------</p>
-  </section>
-  <section>
-    <h2>Liste des tâches :</h2>
+    <!-- dossier compoment  pour inclure le header avec la syntaxe suivante-->
+    <%- include('./component/header') %>
+    <div id="popup" style="display: none; ">
+        <p>Etes-vous sûr de vouloir le supprimer ?</p>
+        <input type="button" value="oui" id="ok">
+        <input type="button" value="annuler" id="close">
+    </div>
+    <section>
+        <form action="/liste" method="post">
+            <input type="hidden" name="id" id="id">
+            <label for="title">title</label>
+            <input type="text" id="title" name="title"><br>
+            <label for="description">Description de la tâche</label><br>
+    <textarea name="description" id="description" cols="40" rows="10"></textarea><br>
+         <input type="submit" value="Enregistrer">
+        </form>
+        <p>-------------------------------------------------------------</p>
+    </section>
+    <section>
+    <h2>Liste de tâches</h2>
+</section>
     <ul>
-      <% for(i=0; i < data.length; i++) { %>
-      <li><%= data[i].title + ': ' + data[i].description %></li>
-      <% } %>
+    <% for(i=0; i < data.length; i++) { %>
+        <li><%= data[i].title + ':' + data[i].description %></li>
+        <input type="button" value="Supprimer" onclick="openModal('<%= data[i].id %>')">
+        <input type="button" value="Modifier"
+            onclick="putData('<%= data[i].id %>','<%= data[i].title %>','<%= data[i].description %>')">
+        <% } %>
     </ul>
-
-  </section>
 </body>
+<script>
+    function putData(id, title, description){
+        document.getElementById('id').value = id;
+        document.getElementById('title').value = title;
+        document.getElementById('description').value = description;
+    }
+    function openModal(id) {
+        document.getElementById('popup').style.display ='block';
+        document.getElementById('ok').addEventListener('click', ()=>{
+            deleteData(id)
+        })
+    }
+    function deleteData(id) {
+        let endPoint = `liste/${id}`;
+        fetch(endPoint, {method : "DELETE"})
+        .then((response)=> response.json())
+        .then((data) => window.location.href = data.routeRacine)
+        .catch((error) => console.error(error));
+    }
+    document.getElementById('close').addEventListener('click', ()=> {
+        document.getElementById('popup').style.display ='none';
+    })
+</script>
 </html>
