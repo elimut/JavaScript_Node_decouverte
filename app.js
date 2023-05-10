@@ -8,7 +8,7 @@ const listeRoutes = require('./routes/listeRoute');
 const optionBDD = {
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: 'password',
   port: 3306,
   database: 'todolist'
 }
